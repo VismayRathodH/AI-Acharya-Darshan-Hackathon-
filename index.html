@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Aacharya - Language Companion</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .black {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-container">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-logo">
+                <span class="ai-text">AI</span><span class="leaning-tool-text">आचार्य</span>
+            </div>
+            <nav class="header-nav">
+                
+                <button id="modeToggleButton" class="mode-toggle-button">Dark Mode</button>
+            </nav>
+        </header>
+
+        <!-- Hero Section (Voice Recognition) -->
+        <section class="hero-section">
+            <!-- Background Glows -->
+            <div class="aurora-glow aurora-glow-1"></div>
+            <div class="aurora-glow aurora-glow-2"></div>
+
+            <h1 class="hero-title">
+                Speak and Learn <br> Effortlessly
+            </h1>
+
+            <!-- Language Selection for Voice Response -->
+            <div class="select-wrapper">
+                <label for="voiceResponseLanguage" class="select-label">AI Voice Language:</label>
+                <select id="voiceResponseLanguage" class="input-field">
+                    <option value="en-US" class="black">English (US)</option>
+                    <option value="es-ES" class="black">Spanish (Spain)</option>
+                    <option value="fr-FR" class="black">French (France)</option>
+                    <option value="de-DE" class="black">German (Germany)</option>
+                    <option value="ja-JP" class="black">Japanese (Japan)</option>
+                    <option value="zh-CN" class="black">Mandarin (China)</option>
+                    <option value="mr-MR" class="black">Marathi (India)</option>
+                    <option value="hi-HI" class="black">Hindi (India)</option>
+                    <option value="gu-GU" class="black">Gujarati (India)</option>
+                </select>
+            </div>
+
+            <!-- Role Selection for Voice Response -->
+            <div class="select-wrapper" style="margin-bottom: 2rem;"> <!-- Adjusted for mb-8 -->
+                <label for="aiRole" class="select-label">AI Role:</label>
+                <select id="aiRole" class="input-field">
+                    <option value="friendly language learning companion">Friendly Language Companion</option>
+                    <option value="strict grammar teacher">Strict Grammar Teacher</option>
+                    <option value="casual conversation partner">Casual Conversation Partner</option>
+                    <option value="travel guide for a new city">Travel Guide</option>
+                    <option value="job interviewer">Job Interviewer</option>
+                </select>
+            </div>
+
+            <!-- Response language selection -->
+
+
+            <div class="mic-button-container">
+                <button id="micButton" class="mic-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm5 10.5a.5.5 0 01.5.5v.5a.5.5 0 01-1 0v-.5a.5.5 0 01.5-.5zM10 18a.5.5 0 00.5-.5v-1.586l1.293 1.293a.5.5 0 00.707-.707L10.707 15H9.293l-1.793 1.793a.5.5 0 00.707.707L9.5 16.914V17.5a.5.5 0 00.5.5z"
+                            clip-rule="evenodd" />
+                        <path
+                            d="M5 8a5 5 0 004 4.9V15a1 1 0 102 0v-2.1A5 5 0 005 8zm-2 0a7 7 0 1114 0v1a1 1 0 11-2 0V8a5 5 0 00-5-5 5 5 0 00-5 5v1a1 1 0 11-2 0V8z" />
+                    </svg>
+                </button>
+            </div>
+            <p id="voiceOutput" class="voice-output-text">Click the microphone to start speaking...</p>
+
+            <!-- Response language selection -->
+
+            <label for="language-select">Choose Output Language:</label>
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="hi">Hindi</option>
+                <option value="zh">Chinese</option>
+            </select>
+
+            <div id="voiceLoading" class="loading-spinner hidden"
+                style="margin-left: auto; margin-right: auto; margin-top: 1rem;"></div>
+            <div id="aiVoiceResponseArea" class="ai-response-area hidden" style="margin-top: 1rem; padding: 1rem;">
+                <p class="placeholder">AI's Voice Response:</p>
+                <p id="aiVoiceTextOutput" class="content"></p>
+                <div class="action-buttons-group">
+                    <button id="speakAiVoiceBtn" class="action-button" disabled>Speak Response</button>
+                    <button id="stopAiVoiceBtn" class="action-button stop-button" disabled>Stop Speaking</button>
+                    <button id="deleteVoiceResponseBtn" class="action-button delete-button" disabled>Delete
+                        Response</button>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="why-choose-section scroll-animate">
+            <!-- Background Image -->
+            <img src="https://placehold.co/1200x800/6e44ff/000000.png?text=+" class="section-background-image"
+                style="opacity: 0.2;" alt="Abstract purple background wave">
+
+            <div class="section-content-wrapper">
+                <h2 class="why-choose-title">Why choose AILeaning Tool?</h2>
+                <div class="why-choose-grid">
+                    <div class="glass-card feature-item">
+                        <h3 class="text-xl font-semibold">Voice Interaction</h3>
+                        <div class="feature-icon"></div>
+                    </div>
+                    <div class="glass-card feature-item">
+                        <h3 class="text-xl font-semibold">Grammar & Tense Guide</h3>
+                        <div class="feature-icon"></div>
+                    </div>
+                    <div class="glass-card feature-item">
+                        <h3 class="text-xl font-semibold">Image Understanding</h3>
+                        <div class="feature-icon"></div>
+                    </div>
+                    <div class="glass-card feature-item">
+                        <h3 class="text-xl font-semibold">Personalized Learning</h3>
+                        <div class="feature-icon"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tense Guide & Grammar Correction Section -->
+        <section class="feature-section scroll-animate">
+            <!-- Background Image -->
+            <img src="https://placehold.co/1200x800/a955f7/1a1226.png?text=+" class="section-background-image"
+                style="opacity: 0.25;" alt="Abstract purple and black background wave">
+
+            <div class="section-content-wrapper">
+                <h2 class="feature-title">Tense Guide & Grammar Correction</h2>
+                <div class="feature-content-wrapper">
+                    <textarea id="grammarInput" class="input-field" rows="4"
+                        placeholder="Type your sentence here for grammar correction or tense explanation..."></textarea>
+                    <button id="analyzeGrammarBtn" class="mic-button"
+                        style="width: 100%; height: auto; padding: 0.75rem 1.5rem; border-radius: 0.75rem;">
+                        Analyze Text
+                        <span id="grammarLoading" class="loading-spinner hidden"></span>
+                    </button>
+                    <div class="ai-response-area glass-card" style="margin-top: 1rem; padding: 1rem;">
+                        <p class="placeholder">AI Response will appear here:</p>
+                        <p id="grammarOutput" class="content"></p>
+                        <div class="action-buttons-group">
+                            <button id="speakGrammarBtn" class="action-button" disabled>Speak Response</button>
+                            <button id="stopGrammarBtn" class="action-button stop-button" disabled>Stop
+                                Speaking</button>
+                            <button id="deleteGrammarBtn" class="action-button delete-button" disabled>Delete
+                                Response</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Understanding and Answering Section -->
+        <section class="feature-section scroll-animate">
+            <!-- Background Image -->
+            <img src="https://placehold.co/1200x800/6e44ff/000000.png?text=+" class="section-background-image"
+                style="opacity: 0.2;" alt="Abstract purple background wave">
+
+            <div class="section-content-wrapper">
+                <h2 class="feature-title">Image Understanding & Answering</h2>
+                <div class="feature-content-wrapper">
+                    <label for="imageUpload" class="select-label" style="text-align: left;">Upload an Image:</label>
+                    <input type="file" id="imageUpload" class="input-field" accept="image/*" style="cursor: pointer;">
+                    <img id="uploadedImage" class="image-preview hidden" src="" alt="Uploaded Image Preview"
+                        style="margin-left: auto; margin-right: auto; margin-top: 1rem;">
+
+                    <textarea id="imageQuestion" class="input-field" rows="3"
+                        placeholder="Ask a question about the image..." style="margin-top: 1rem;"></textarea>
+                    <button id="askImageQuestionBtn" class="mic-button"
+                        style="width: 100%; height: auto; padding: 0.75rem 1.5rem; border-radius: 0.75rem;">
+                        Ask AI about Image
+                        <span id="imageLoading" class="loading-spinner hidden"></span>
+                    </button>
+                    <div class="ai-response-area glass-card" style="margin-top: 1rem; padding: 1rem;">
+                        <p class="placeholder">AI's Answer will appear here:</p>
+                        <p id="imageAnswer" class="content"></p>
+                        <div class="action-buttons-group">
+                            <button id="speakImageBtn" class="action-button" disabled>Speak Response</button>
+                            <button id="stopImageBtn" class="action-button stop-button" disabled>Stop Speaking</button>
+                            <button id="deleteImageBtn" class="action-button delete-button" disabled>Delete
+                                Response</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <h1>Real-time Webcam OCR Scanner</h1>
+
+                <div class="camera-section">
+                    <div class="camera-controls">
+
+
+                        <button id="startCameraButton">Start Camera</button>
+                        <button id="stopCameraButton" disabled>Stop Camera</button>
+                    </div>
+                    <div class="video-container">
+                        <video id="cameraFeed" autoplay playsinline></video>
+                        <canvas id="overlayCanvas"></canvas>
+                    </div>
+                    <label for="processingRate">Processing Rate (ms):</label>
+                    <input type="range" id="processingRate" min="100" max="2000" value="2000">
+                    <span id="rateValue">2000ms</span>
+                </div>
+
+                <div class="ocr-section">
+                    <h2>Recognized Text:</h2>
+                    <p id="ocrStatus">Start camera to begin real-time text detection.</p>
+                    <div id="ocrResult"></div>
+                </div>
+
+                <div class="instructions">
+                    <h3>Tips for Best Results:</h3>
+                    <ul>
+                        <li>Ensure good, even lighting.</li>
+                        <li>Hold the text flat and as parallel to the camera as possible.</li>
+                        <li>Keep the text in focus.</li>
+                        <li>Minimize background clutter.</li>
+                        <li>Move slowly and steadily.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
+        </section>
+
+        <!-- Conversational Chat Section -->
+        <section class="feature-section scroll-animate">
+            <!-- Background Image -->
+            <img src="https://placehold.co/1200x800/a955f7/1a1226.png?text=+" class="section-background-image"
+                style="opacity: 0.25;" alt="Abstract purple and black background wave">
+
+            <div class="section-content-wrapper">
+                <h2 class="feature-title">Conversational Chat</h2>
+                <div class="feature-content-wrapper">
+                    <button id="clearChatBtn" class="clear-chat-button">Clear Chat</button>
+                    <div id="chatDisplay" class="chat-container">
+                        <!-- Chat messages will be appended here -->
+                        <div class="chat-message ai">Hello! How can I help you with your language learning today?</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" class="input-field" placeholder="Type your message here...">
+                        <button id="sendChatBtn" class="chat-send-button">Send</button>
+
+
+                        <button id="stopChatBtn" disabled>Stop Response</button>
+                    </div>
+                    <div id="chatLoading" class="loading-spinner hidden"
+                        style="margin-left: auto; margin-right: auto; margin-top: 1rem;"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- How AILeaning Tool Works Section (Adjusted) -->
+        <section class="how-it-works-section scroll-animate">
+            <h2 class="how-it-works-title">How AILeaning Tool works</h2>
+            <div class="how-it-works-video-wrapper glass-card">
+                <video src="Screen Recording 2025-05-03 090153.mp4" plays-inline loop muted controls type="video/mp4">
+
+                </video>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 AILeaning Tool. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script type="module">
+
+        // OCR Scanning.
+
+        const cameraFeed = document.getElementById('cameraFeed');
+        const overlayCanvas = document.getElementById('overlayCanvas');
+        const overlayContext = overlayCanvas.getContext('2d');
+        const startCameraButton = document.getElementById('startCameraButton');
+        const stopCameraButton = document.getElementById('stopCameraButton');
+        const cameraSelect = document.getElementById('cameraSelect'); // New element
+        const processingRateInput = document.getElementById('processingRate');
+        const rateValueSpan = document.getElementById('rateValue');
+        const ocrStatus = document.getElementById('ocrStatus');
+        const ocrResult = document.getElementById('ocrResult');
+
+        let stream = null;
+        let tesseractWorker = null;
+        let processingInterval = null;
+        let currentProcessingRate = parseInt(processingRateInput.value, 10);
+        let isProcessing = false;
+        let availableCameras = []; // To store the list of cameras
+
+        // --- Helper Functions for Image Preprocessing ---
+        function toGrayscale(imgData) {
+            const pixels = imgData.data;
+            for (let i = 0; i < pixels.length; i += 4) {
+                const avg = (pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3;
+                pixels[i] = avg;     // Red
+                pixels[i + 1] = avg; // Green
+                pixels[i + 2] = avg; // Blue
+            }
+            return imgData;
+        }
+
+        function binarize(imgData, threshold = 150) { // Adjusted threshold slightly
+            const pixels = imgData.data;
+            for (let i = 0; i < pixels.length; i += 4) {
+                const avg = (pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3;
+                const value = avg > threshold ? 255 : 0;
+                pixels[i] = value;
+                pixels[i + 1] = value;
+                pixels[i + 2] = value;
+            }
+            return imgData;
+        }
+
+        // --- Tesseract.js Initialization ---
+        async function initializeTesseractWorker() {
+            if (tesseractWorker) {
+                console.log('Tesseract worker already initialized.');
+                return;
+            }
+            ocrStatus.textContent = 'Loading OCR engine... (first time might take a moment)';
+            try {
+                tesseractWorker = await Tesseract.createWorker('eng', 1, {
+                    logger: m => {
+                        if (m.status === 'recognizing') {
+                            ocrStatus.textContent = `OCR Progress: ${Math.round(m.progress * 100)}%`;
+                        } else if (m.status === 'loaded') {
+                            ocrStatus.textContent = 'OCR engine loaded.';
+                        } else {
+                            ocrStatus.textContent = `OCR Status: ${m.status.charAt(0).toUpperCase() + m.status.slice(1)}...`;
+                        }
+                    },
+                });
+                ocrStatus.textContent = 'OCR engine ready. Point camera at text!';
+            } catch (error) {
+                console.error('Failed to initialize Tesseract worker:', error);
+                ocrStatus.textContent = 'Error loading OCR engine.';
+            }
+        }
+
+        // --- Camera & OCR Logic ---
+
+        // Function to populate the camera dropdown
+        async function populateCameraList() {
+            cameraSelect.innerHTML = ''; // Clear existing options
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                availableCameras = devices.filter(device => device.kind === 'videoinput');
+
+                if (availableCameras.length === 0) {
+                    const option = document.createElement('option');
+                    option.value = '';
+                    option.textContent = 'No camera found';
+                    cameraSelect.appendChild(option);
+                    startCameraButton.disabled = true; // Disable start button if no camera
+                    return;
+                }
+
+                availableCameras.forEach((device, index) => {
+                    const option = document.createElement('option');
+                    option.value = device.deviceId;
+                    // Use device.label if available, otherwise a generic name
+                    option.textContent = device.label || `Camera ${index + 1}`;
+                    cameraSelect.appendChild(option);
+                });
+                startCameraButton.disabled = false; // Enable start button if cameras are found
+            } catch (err) {
+                console.error('Error enumerating devices:', err);
+                ocrStatus.textContent = 'Error: Could not list cameras.';
+                startCameraButton.disabled = true;
+            }
+        }
+
+        async function startCamera() {
+            if (stream) { // If camera is already active, stop it first
+                stopCamera();
+            }
+
+            const selectedCameraId = cameraSelect.value;
+            if (!selectedCameraId) {
+                alert('Please select a camera first!');
+                return;
+            }
+
+            const constraints = {
+                video: {
+                    deviceId: { exact: selectedCameraId } // Use the selected camera ID
+                }
+            };
+
+            try {
+                stream = await navigator.mediaDevices.getUserMedia(constraints);
+                cameraFeed.srcObject = stream;
+                cameraFeed.style.display = 'block';
+                startCameraButton.disabled = true;
+                stopCameraButton.disabled = false;
+                cameraSelect.disabled = true; // Disable camera selection while active
+                ocrResult.textContent = '';
+                ocrStatus.textContent = 'Camera active. Loading OCR engine...';
+
+                // Set canvas dimensions to match video feed
+                cameraFeed.onloadedmetadata = () => {
+                    overlayCanvas.width = cameraFeed.videoWidth;
+                    overlayCanvas.height = cameraFeed.videoHeight;
+                    console.log(`Video dimensions: ${cameraFeed.videoWidth}x${cameraFeed.videoHeight}`);
+                };
+
+                await initializeTesseractWorker();
+                startProcessing();
+
+            } catch (err) {
+                console.error('Error accessing camera:', err);
+                ocrStatus.textContent = `Error: Could not access selected camera (${err.name}). Please try another or check permissions.`;
+                alert(`Error: Could not access selected camera (${err.name}). Please ensure you have a camera connected and grant permission.`);
+                stopCamera(); // Clean up if camera access fails
+            }
+        }
+
+        function stopCamera() {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                stream = null;
+            }
+            cameraFeed.srcObject = null;
+            cameraFeed.style.display = 'none';
+            startCameraButton.disabled = false;
+            stopCameraButton.disabled = true;
+            cameraSelect.disabled = false; // Enable camera selection
+            stopProcessing();
+            overlayContext.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+            ocrStatus.textContent = 'Camera stopped. Start camera to begin real-time text detection.';
+            ocrResult.textContent = '';
+            // We don't terminate Tesseract worker here, it can be reused
+        }
+
+        async function processFrame() {
+            if (!stream || !tesseractWorker || isProcessing) {
+                return;
+            }
+
+            isProcessing = true;
+            ocrStatus.textContent = 'Analyzing frame...';
+            overlayContext.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+
+            const tempCanvas = document.createElement('canvas');
+            const tempContext = tempCanvas.getContext('2d');
+            tempCanvas.width = cameraFeed.videoWidth;
+            tempCanvas.height = cameraFeed.videoHeight;
+
+            tempContext.drawImage(cameraFeed, 0, 0, tempCanvas.width, tempCanvas.height);
+
+            let imageData = tempContext.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+            imageData = toGrayscale(imageData);
+            imageData = binarize(imageData, 150);
+            tempContext.putImageData(imageData, 0, 0);
+
+            try {
+                const { data: { text, words } } = await tesseractWorker.recognize(tempCanvas);
+
+                ocrResult.textContent = text || 'No text found in this frame.';
+                ocrStatus.textContent = 'Text detected!';
+
+                words.forEach(word => {
+                    const { bbox } = word;
+                    overlayContext.strokeStyle = 'red';
+                    overlayContext.lineWidth = 2;
+                    overlayContext.strokeRect(bbox.x, bbox.y, bbox.width, bbox.height);
+
+                    overlayContext.font = '14px Arial';
+                    overlayContext.fillStyle = 'blue';
+                    overlayContext.fillText(word.text, bbox.x, bbox.y - 5);
+                });
+
+            } catch (ocrError) {
+                ocrStatus.textContent = 'No clear text detected or processing error.';
+                ocrResult.textContent = '';
+            } finally {
+                isProcessing = false;
+            }
+        }
+
+        function startProcessing() {
+            if (processingInterval) {
+                clearInterval(processingInterval);
+            }
+            processingInterval = setInterval(processFrame, currentProcessingRate);
+            ocrStatus.textContent = `Real-time scanning active (${currentProcessingRate}ms/frame).`;
+        }
+
+        function stopProcessing() {
+            if (processingInterval) {
+                clearInterval(processingInterval);
+                processingInterval = null;
+            }
+            isProcessing = false;
+        }
+
+        // --- Event Listeners ---
+        startCameraButton.addEventListener('click', startCamera);
+        stopCameraButton.addEventListener('click', stopCamera);
+
+        processingRateInput.addEventListener('input', (event) => {
+            currentProcessingRate = parseInt(event.target.value, 10);
+            rateValueSpan.textContent = `${currentProcessingRate}ms`;
+            if (stream) {
+                startProcessing();
+            }
+        });
+
+        // Listen for device changes (e.g., if a USB camera is plugged in/out)
+        navigator.mediaDevices.addEventListener('devicechange', populateCameraList);
+
+        // Initial setup
+        // Try to populate camera list on page load
+        // Important: `enumerateDevices()` might return empty labels until `getUserMedia()` has been called once and permission granted.
+        // So, the user might see generic "Camera 1", "Camera 2" initially, but after starting the camera once, the labels should update.
+        populateCameraList();
+
+        startCameraButton.disabled = true; // Disable until cameras are loaded/selected
+        stopCameraButton.disabled = true;
+        cameraFeed.style.display = 'none';
+        ocrStatus.textContent = 'Loading cameras...';
+
+        // --- Theme Mode Toggle ---
+        const modeToggleButton = document.getElementById('modeToggleButton');
+        const body = document.body;
+
+        // Function to set the theme
+        function setTheme(mode) {
+            if (mode === 'light') {
+                body.classList.add('light-mode');
+                modeToggleButton.textContent = 'Dark Mode';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.remove('light-mode');
+                modeToggleButton.textContent = 'Light Mode';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check for saved theme preference on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else {
+                // Default to dark mode if no preference is saved
+                setTheme('dark');
+            }
+        });
+
+        // Toggle theme on button click
+        modeToggleButton.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        });
+
+
+        // --- Web Speech API for Voice Recognition ---
+        const micButton = document.getElementById('micButton');
+        const voiceOutput = document.getElementById('voiceOutput');
+        const voiceLoading = document.getElementById('voiceLoading');
+        const voiceResponseLanguageSelect = document.getElementById('voiceResponseLanguage'); // Language selector
+        const aiRoleSelect = document.getElementById('aiRole'); // New Role selector
+        const aiVoiceResponseArea = document.getElementById('aiVoiceResponseArea'); // AI voice response display
+        const aiVoiceTextOutput = document.getElementById('aiVoiceTextOutput'); // Text output for AI voice
+        const speakAiVoiceBtn = document.getElementById('speakAiVoiceBtn'); // Speak button for AI voice
+        const stopAiVoiceBtn = document.getElementById('stopAiVoiceBtn'); // Stop button for AI voice
+        const deleteVoiceResponseBtn = document.getElementById('deleteVoiceResponseBtn'); // New delete button for voice
+
+        let isRecording = false;
+        let recognition;
+
+        // Check for browser compatibility
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.continuous = false; // Only get one result per speech segment
+            recognition.interimResults = false; // Only return final results
+            recognition.lang = 'en-US'; // Default language for speech input
+
+            recognition.onstart = () => {
+                isRecording = true;
+                micButton.classList.add('mic-pulse'); // Add pulse animation
+                voiceOutput.textContent = 'Listening... Speak now.';
+                voiceLoading.classList.remove('hidden');
+                aiVoiceResponseArea.classList.add('hidden'); // Hide previous AI voice response
+                aiVoiceTextOutput.textContent = ''; // Clear previous AI voice text
+                speakAiVoiceBtn.disabled = true;
+                stopAiVoiceBtn.disabled = true;
+                deleteVoiceResponseBtn.disabled = true; // Disable delete button
+                speechSynthesis.cancel(); // Stop any ongoing speech
+            };
+
+            recognition.onresult = async (event) => {
+                const transcript = event.results[0][0].transcript;
+                voiceOutput.textContent = `You said: "${transcript}"`;
+
+                voiceLoading.classList.remove('hidden'); // Show loading for AI response
+                aiVoiceResponseArea.classList.remove('hidden'); // Show AI response area
+                aiVoiceTextOutput.textContent = 'AI is thinking...';
+
+                const selectedLanguage = voiceResponseLanguageSelect.value;
+                // Corrected: Use voiceResponseLanguageSelect for language name
+                const languageName = voiceResponseLanguageSelect.options[voiceResponseLanguageSelect.selectedIndex].text;
+                const selectedRole = aiRoleSelect.value; // Get selected role
+
+                try {
+                    // Prompt for the Gemini API to respond to the user's speech, incorporating the role
+                    // Speech response First...
+                    const prompt = `You are acting as a ${selectedRole}. The user just said: "${transcript}". Please respond to this in ${selectedLanguage}. Your response should be helpful for a language learner, perhaps by asking a follow-up question, offering a simple correction, or acknowledging their input, all while maintaining your persona as a ${selectedRole}. Keep the response concise.`;
+
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; // Canvas will automatically provide the API key
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const aiText = result.candidates[0].content.parts[0].text;
+                        aiVoiceTextOutput.innerHTML = aiText.replace(/\n/g, '<br>'); // Display AI's text response
+                        speakText(aiText, speakAiVoiceBtn, stopAiVoiceBtn, selectedLanguage); // Speak AI's response
+                        deleteVoiceResponseBtn.disabled = false; // Enable delete button
+                    } else {
+                        aiVoiceTextOutput.textContent = 'AI failed to generate a voice response.';
+                        console.error('Unexpected AI response structure:', result);
+                    }
+                } catch (error) {
+                    console.error('Error calling Gemini API for voice response:', error);
+                    aiVoiceTextOutput.textContent = 'An error occurred while getting AI voice response.';
+                } finally {
+                    voiceLoading.classList.add('hidden'); // Hide loading spinner
+                }
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                voiceOutput.textContent = `Error: ${event.error}. Try again.`;
+                voiceLoading.classList.add('hidden');
+                aiVoiceResponseArea.classList.add('hidden');
+            };
+
+            recognition.onend = () => {
+                isRecording = false;
+                micButton.classList.remove('mic-pulse'); // Remove pulse animation
+                // voiceLoading.classList.add('hidden'); // Keep loading if AI is still thinking
+                if (voiceOutput.textContent === 'Listening... Speak now.') {
+                    voiceOutput.textContent = 'No speech detected. Click the microphone to try again.';
+                }
+            };
+
+            micButton.addEventListener('click', () => {
+                if (!isRecording) {
+                    recognition.start();
+                } else {
+                    recognition.stop();
+                }
+            });
+        } else {
+            voiceOutput.textContent = 'Speech Recognition not supported in this browser.';
+            micButton.disabled = true;
+            micButton.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+
+        // --- Text-to-Speech (TTS) Utility Function ---
+        function speakText(text, speakButton, stopButton, lang = 'en-US') {
+            if (!'speechSynthesis' in window) {
+                console.warn('Text-to-Speech not supported in this browser.');
+                return;
+            }
+
+            // If speech is already ongoing, stop it before starting new one
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang; // Set language for speech synthesis based on parameter
+
+            // Optional: Find a suitable voice for the selected language
+            const voices = speechSynthesis.getVoices();
+            const preferredVoice = voices.find(voice => voice.lang === lang && (voice.name.includes('Google') || voice.default));
+            if (preferredVoice) {
+                utterance.voice = preferredVoice;
+            } else {
+                console.warn(`No preferred voice found for language: ${lang}. Using default.`);
+            }
+
+            utterance.onstart = () => {
+                if (speakButton) {
+                    speakButton.textContent = 'Speaking...';
+                    speakButton.disabled = true;
+                }
+                if (stopButton) stopButton.disabled = false; // Enable stop button
+            };
+            utterance.onend = () => {
+                if (speakButton) {
+                    speakButton.textContent = 'Speak Response';
+                    speakButton.disabled = false;
+                }
+                if (stopButton) stopButton.disabled = true; // Disable stop button
+            };
+            utterance.onerror = (event) => {
+                console.error('Speech synthesis error:', event.error);
+                if (speakButton) {
+                    speakButton.textContent = 'Error Speaking';
+                    speakButton.disabled = false;
+                }
+                if (stopButton) stopButton.disabled = true; // Disable stop button
+            };
+
+            speechSynthesis.speak(utterance);
+        }
+
+        // --- Stop Speaking Utility Function ---
+        function stopSpeaking(speakButton, stopButton) {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+            if (speakButton) {
+                speakButton.textContent = 'Speak Response';
+                speakButton.disabled = false;
+            }
+            if (stopButton) stopButton.disabled = true;
+        }
+
+        // Event listener for the Delete Voice Response button
+        deleteVoiceResponseBtn.addEventListener('click', () => {
+            voiceOutput.textContent = 'Click the microphone to start speaking...'; // Reset voice input text
+            aiVoiceTextOutput.textContent = ''; // Clear AI's text response
+            aiVoiceResponseArea.classList.add('hidden'); // Hide AI response area
+            speakAiVoiceBtn.disabled = true;
+            stopAiVoiceBtn.disabled = true;
+            deleteVoiceResponseBtn.disabled = true;
+            speechSynthesis.cancel(); // Stop any ongoing speech
+        });
+
+
+        // --- Tense Guide & Grammar Correction (Gemini API) ---
+        const grammarInput = document.getElementById('grammarInput');
+        const analyzeGrammarBtn = document.getElementById('analyzeGrammarBtn');
+        const grammarOutput = document.getElementById('grammarOutput');
+        const grammarLoading = document.getElementById('grammarLoading');
+        const speakGrammarBtn = document.getElementById('speakGrammarBtn');
+        const stopGrammarBtn = document.getElementById('stopGrammarBtn');
+        const deleteGrammarBtn = document.getElementById('deleteGrammarBtn'); // New delete button
+
+        analyzeGrammarBtn.addEventListener('click', async () => {
+            const text = grammarInput.value.trim();
+            if (!text) {
+                grammarOutput.textContent = 'Please enter some text to analyze.';
+                speakGrammarBtn.disabled = true;
+                stopGrammarBtn.disabled = true;
+                deleteGrammarBtn.disabled = true; // Disable delete button
+                return;
+            }
+
+            grammarOutput.textContent = ''; // Clear previous output
+            grammarLoading.classList.remove('hidden'); // Show loading spinner
+            analyzeGrammarBtn.disabled = true; // Disable button during processing
+            speakGrammarBtn.disabled = true; // Disable speak button during processing
+            stopGrammarBtn.disabled = true; // Disable stop button during processing
+            deleteGrammarBtn.disabled = true; // Disable delete button during processing
+
+            // Stop any ongoing speech before starting new analysis
+            speechSynthesis.cancel();
+
+            try {
+                // Prompt for the Gemini API
+                const prompt = `As an expert English grammar and language tutor, please analyze the following sentence for any grammatical errors, spelling mistakes, and provide a clear explanation of the tenses used. If there are errors, suggest corrections. If the sentence is grammatically correct, state that and explain its tense.
+
+                Sentence: "${text}"
+
+                Format your response clearly, first stating corrections (if any), then explaining the tense(s) in simple terms.`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Canvas will automatically provide the API key
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const aiText = result.candidates[0].content.parts[0].text;
+                    grammarOutput.innerHTML = aiText.replace(/\n/g, '<br>'); // Display response, convert newlines to <br>
+                    speakGrammarBtn.disabled = false; // Enable speak button after response
+                    deleteGrammarBtn.disabled = false; // Enable delete button after response
+                } else {
+                    grammarOutput.textContent = 'Failed to get a response from AI. Please try again.';
+                    console.error('Unexpected AI response structure:', result);
+                    speakGrammarBtn.disabled = true;
+                    deleteGrammarBtn.disabled = true;
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                grammarOutput.textContent = 'An error occurred while analyzing. Please try again later.';
+                speakGrammarBtn.disabled = true;
+                deleteGrammarBtn.disabled = true;
+            } finally {
+                grammarLoading.classList.add('hidden'); // Hide loading spinner
+                analyzeGrammarBtn.disabled = false; // Re-enable button
+            }
+        });
+
+        // Event listener for the Speak Grammar button
+        speakGrammarBtn.addEventListener('click', () => {
+            const textToSpeak = grammarOutput.textContent;
+            if (textToSpeak && textToSpeak !== 'AI Response will appear here:') {
+                // Use the language selected for voice response in the main section for grammar output
+                const selectedLanguage = voiceResponseLanguageSelect.value;
+                speakText(textToSpeak, speakGrammarBtn, stopGrammarBtn, selectedLanguage);
+            }
+        });
+
+        // Event listener for the Stop Grammar button
+        stopGrammarBtn.addEventListener('click', () => {
+            stopSpeaking(speakGrammarBtn, stopGrammarBtn);
+        });
+
+        // Event listener for the Delete Grammar button
+        deleteGrammarBtn.addEventListener('click', () => {
+            grammarOutput.textContent = ''; // Clear the response
+            speakGrammarBtn.disabled = true;
+            stopGrammarBtn.disabled = true;
+            deleteGrammarBtn.disabled = true;
+            speechSynthesis.cancel(); // Stop any ongoing speech
+        });
+
+
+        // --- Image Understanding and Answering (Gemini API) ---
+        const chatDisplay = document.getElementById('chatDisplay');
+        const chatInput = document.getElementById('chatInput');
+        const sendChatBtn = document.getElementById('sendChatBtn');
+        const chatLoading = document.getElementById('chatLoading');
+        const clearChatBtn = document.getElementById('clearChatBtn'); // New clear chat button
+        const stopChatBtn = document.getElementById('stopChatBtn'); // New stop chat button
+
+        // Maintain chat history for conversational context
+        let chatHistory = [{ role: "model", parts: [{ text: "Hello! How can I help you with your language learning today?" }] }];
+
+        // Variable to hold the AbortController for stopping the fetch request
+        let abortController = null;
+
+        // Function to add a message to the chat display with typing animation for AI
+        async function addChatMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', sender);
+            chatDisplay.appendChild(messageDiv);
+            chatDisplay.scrollTop = chatDisplay.scrollHeight; // Auto-scroll to bottom
+
+            if (sender === 'ai') {
+                let i = 0;
+                // Check if the request has been aborted during typing
+                while (i < text.length && (!abortController || !abortController.signal.aborted)) {
+                    messageDiv.textContent += text.charAt(i);
+                    i++;
+                    chatDisplay.scrollTop = chatDisplay.scrollHeight; // Keep scrolling
+                    await new Promise(resolve => setTimeout(resolve, 20)); // Adjust typing speed here
+                }
+                // If aborted, set the full text to avoid partial messages
+                if (abortController && abortController.signal.aborted) {
+                    messageDiv.textContent = text.substring(0, i); // Display what was typed so far
+                }
+            } else {
+                messageDiv.textContent = text;
+            }
+            chatDisplay.scrollTop = chatDisplay.scrollHeight; // Final scroll to bottom
+        }
+
+        // Initialize chat display with initial greeting
+        function initializeChat() {
+            chatDisplay.innerHTML = ''; // Clear all existing messages
+            chatHistory = [{ role: "model", parts: [{ text: "Hello! How can I help you with your language learning today?" }] }];
+            addChatMessage(chatHistory[0].parts[0].text, 'ai');
+        }
+
+        // Call initializeChat on load to set up the initial message
+        document.addEventListener('DOMContentLoaded', initializeChat);
+
+
+        sendChatBtn.addEventListener('click', async () => {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            addChatMessage(userMessage, 'user');
+            chatInput.value = ''; // Clear input field
+            chatInput.disabled = true;
+            sendChatBtn.disabled = true;
+            stopChatBtn.disabled = false; // Enable stop button
+            chatLoading.classList.remove('hidden');
+
+            // Add user message to chat history
+            chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
+
+            // Initialize a new AbortController for this request
+            abortController = new AbortController();
+            const signal = abortController.signal;
+
+            try {
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Canvas will automatically provide the API key
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                
+
+                // Update the last message in chatHistory to include the full prompt
+                chatHistory[chatHistory.length - 1].parts[0].text = prompt_;
+
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                    signal: signal // Pass the abort signal here
+                });
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const aiText = result.candidates[0].content.parts[0].text;
+                    await addChatMessage(aiText, 'ai'); // Use await for typing animation
+                    // Add AI response to chat history
+                    chatHistory.push({ role: "model", parts: [{ text: aiText }] });
+                } else {
+                    addChatMessage('AI failed to respond. Please try again.', 'ai');
+                    console.error('Unexpected AI chat response structure:', result);
+                }
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    console.log('Fetch request aborted by user.');
+                    addChatMessage('Response stopped.', 'ai');
+                } else {
+                    console.error('Error calling Gemini API for chat:', error);
+                    addChatMessage('An error occurred during chat. Please try again later.', 'ai');
+                }
+            } finally {
+                chatInput.disabled = false;
+                sendChatBtn.disabled = false;
+                stopChatBtn.disabled = true; // Disable stop button again
+                chatLoading.classList.add('hidden');
+                chatInput.focus(); // Focus back on input
+                abortController = null; // Clear the abort controller
+            }
+        });
+
+        // Event listener for the Stop Chat button
+        stopChatBtn.addEventListener('click', () => {
+            if (abortController) {
+                abortController.abort(); // Abort the ongoing fetch request
+            }
+            chatInput.disabled = false;
+            sendChatBtn.disabled = false;
+            stopChatBtn.disabled = true; // Disable stop button
+            chatLoading.classList.add('hidden');
+            chatInput.focus();
+        });
+
+
+        // Allow sending message with Enter key
+        chatInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter' && !event.shiftKey) { // Allow Shift+Enter for new line
+                event.preventDefault(); // Prevent default Enter behavior (e.g., new line)
+                sendChatBtn.click(); // Trigger button click
+            }
+        });
+
+        // Event listener for the Clear Chat button
+        clearChatBtn.addEventListener('click', () => {
+            initializeChat(); // Reset chat
+            if (abortController) { // If a request is ongoing, abort it
+                abortController.abort();
+                abortController = null;
+            }
+            chatInput.disabled = false;
+            sendChatBtn.disabled = false;
+            stopChatBtn.disabled = true; // Ensure stop button is disabled
+            chatLoading.classList.add('hidden');
+            chatInput.focus();
+        });
+
+        // --- Scroll Animation and Parallax Effect ---
+        // Function to check element visibility and apply animation
+        function checkVisibility() {
+            const animatedElements = document.querySelectorAll('.scroll-animate');
+            animatedElements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                // Check if element is in viewport (with a buffer of 100px from bottom)
+                if (rect.top < window.innerHeight - 100 && rect.bottom > 0) {
+                    element.classList.add('visible');
+                }
+            });
+
+            // Parallax effect for background images
+            const backgroundImages = document.querySelectorAll('.section-background-image');
+            backgroundImages.forEach(img => {
+                const speed = 0.05; // Adjust speed as needed for the parallax effect
+                const yPos = window.scrollY * speed;
+                // Apply transform to move the background image slightly against the scroll direction
+                img.style.transform = `translate(-50%, calc(-50% - ${yPos}px))`;
+            });
+        }
+
+        // Initial check on load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add scroll-animate class to relevant sections for fade-in/slide-up effect
+            document.querySelectorAll('.why-choose-section, .feature-section, .how-it-works-section').forEach(section => {
+                section.classList.add('scroll-animate');
+            });
+
+            checkVisibility(); // Run once on load to set initial states
+        });
+
+        // Check on scroll
+        window.addEventListener('scroll', checkVisibility);
+
+        // Also re-run on resize, in case element positions change
+        window.addEventListener('resize', checkVisibility);
+    </script>
+</body>
+
+</html>
